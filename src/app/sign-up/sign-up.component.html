@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="fluid-container bg-light mt-5">
+    <div class="row">
+        <div class="col-md-3 "></div>
+        <div class="col-md-5 mx-5">
+            <form [formGroup]="SignUpForm" (ngSubmit)="onSubmit()" class="card mx-5 p-5">
+                <div class="text-center mb-3"><h2><b>{{title}}</b></h2></div>
+                
+                <div class="row mt-3">
+                    <div *ngIf="userId" class="col-md-2 form-group">
+                        <label for="id"  class="form-label"> Id :</label>
+                        <input type="text" [(ngModel)]="user.id" class="form-control form-control-lg" formControlName="id" id="id" >     
+                    </div>
+                    <div class="col form-group">
+                         <label for="firstName" class="form-label">First Name :</label>
+                         <input type="text" class="form-control" [(ngModel)]="user.firstName" class="form-control form-control-lg" (keypress)="alphabetsOnly($event)" formControlName="firstName" id="firstName" required>
+                         <div class="mt-2" *ngIf="SignUpForm.controls.firstName.errors &&  (SignUpForm.controls.firstName.touched || SignUpForm.controls.firstName.dirty )">
+                            <span class="error" *ngIf="SignUpForm.controls.firstName.errors?.required"> *Enter Your First Name</span>
+                        </div> 
+                    </div>
+                    <div class="col form-group">
+                        <label for="lastName" class="form-label">LastName:</label>
+                        <input class="form-control form-control-lg" (keypress)="alphabetsOnly($event)" formControlName="lastName" [(ngModel)]="user.lastName" id="lastName" required> 
+                        <div class="mt-2" *ngIf="SignUpForm.controls.lastName.errors &&  (SignUpForm.controls.lastName.touched || SignUpForm.controls.lastName.dirty )">
+                            <span class="error" *ngIf="SignUpForm.controls.lastName.errors?.required"> *Enter Your Last Name</span>
+                        </div>          
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label for="mobileNo"  class="form-label">Mobile No :</label>
+                    <input type="tel" [(ngModel)]="user.mobileNo" class="form-control form-control-lg" formControlName="mobileNo"  id="mobileNo" required (keypress)="numberOnly($event)" minlength="10" maxlength="10">
+                    <div class="mt-2" *ngIf="SignUpForm.controls.mobileNo.errors && (SignUpForm.controls.mobileNo.touched || SignUpForm.controls.mobileNo.dirty)">
+                        <span class="error" *ngIf="SignUpForm.controls.mobileNo.errors?.required"> *Enter Your Mobile Number</span>
+                        <span class="error" *ngIf="SignUpForm.controls.mobileNo.errors?.minlength"> *Mobile No should be 10 digits</span>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label for="emailId"  class="form-label">Email Id :</label>
+                    <input type="email" [(ngModel)]="user.emailId" class="form-control form-control-lg" formControlName="emailId"  id="emailId" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                    <div class="mt-2" *ngIf="SignUpForm.controls.emailId.errors && (SignUpForm.controls.emailId.touched || SignUpForm.controls.emailId.dirty)">
+                        <span class="error" *ngIf="SignUpForm.controls.emailId.errors?.required"> *Enter Your Email Id</span>
+                        <span class="error" *ngIf="SignUpForm.controls.emailId.errors?.pattern"> *Enter a valid Email</span>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label for="password"  class="form-label">Password :</label>
+                    <input type="password" [(ngModel)]="user.password" class="form-control form-control-lg" formControlName="password"  id="password" required  minlength="8">
+                    <div class="mt-2" *ngIf="SignUpForm.controls.password.errors && (SignUpForm.controls.password.touched || SignUpForm.controls.password.dirty)">
+                        <span class="error" *ngIf="SignUpForm.controls.password.errors?.required"> *Enter Your Password</span>
+                        <span class="error" *ngIf="SignUpForm.controls.password.errors?.minlength"> *Password should be atleast 8 characters</span>
+                    </div>
+                </div>
+                <div class="row mt-3 ">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-danger p-3"> Reset </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" [disabled]="SignUpForm.invalid" class="btn btn-primary float-right p-3"> {{button}}</button>
+                    </div>
+                </div>
+                <div class="h6 text-center mt-3">Already Registered ? <a [routerLink]="['/login']">Login Here!</a></div>
+            </form>
+        </div>
+    </div>
+</div>

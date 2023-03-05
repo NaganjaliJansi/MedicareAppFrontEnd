@@ -1,0 +1,43 @@
+<app-admin-header></app-admin-header>
+<div class="fluid-container mt-5">
+    <div class="row mt-5">
+        <div class="col-md-3 "></div>
+        <div class="col-md-5 mx-5 card bg-light p-5">
+            <div class="form-group row">
+                <h5 class="col-sm-4 " >Id </h5>
+                <div class="col-sm-8">
+                  <h4><b><i>:   {{product.id}}</i></b></h4>
+                </div>
+            </div>
+            <div class="form-group row">
+                <h5 class="col-sm-4 ">Product Name </h5>
+                    <div class="col-sm-8">
+                      <h4><b><i>: {{product.name}}</i></b></h4>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <h5 class="col-sm-4 ">Description </h5>
+                    <div class="col-sm-8">
+                      <h4><b><i>: {{product.description}}</i></b></h4>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <h5 class="col-sm-4 ">Cost (1 Sheet) </h5>
+                    <div class="col-sm-8">
+                      <h4><b><i>: {{ product.cost | currency:'INR'}}</i></b></h4>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <h5 class="col-sm-4 ">Status </h5>
+                    <div class="col-sm-8">
+                      <h4 *ngIf="product.status==true" class="text-success"><b><i>: Available</i></b></h4>
+                      <h4 *ngIf="product.status==false" class="text-danger"><b><i>: Not Available</i></b></h4>
+                    </div>
+            </div>
+            <div class="col-sm-4 mt-4">
+                <button class="btn btn-primary p-2" (click)="back()">Back to List</button>
+            </div>
+        </div>
+    </div>
+</div>
+

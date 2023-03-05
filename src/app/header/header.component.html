@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkmagenta; ">
+    <div class="container-fluid">
+        <a class="navbar-brand text-bold" [routerLink]="['/buyNow']">
+            <span style="font-size:xx-large;color:white" class="mx-5"><b> <i>Medicare</i></b></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-md-9">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+                    <li class="nav-item me-5" *ngIf="loggedUser">
+                        <a class="nav-link active" style="color:white" aria-current="page" [routerLink]="['/buyNow']"><span class="h5"><b><i>Products</i></b></span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="d-flex col-md-3">
+                <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                  <li class="nav-item me-5" *ngIf="!loggedUser">
+                    <a class="nav-link" style="color:white" [routerLink]="['/signUp']"><span class="h5"><b><i>Sign Up</i></b></span></a>
+                  </li>
+                  <li class="nav-item mx-5" *ngIf="!loggedUser">
+                    <a class="nav-link" style="color:white" [routerLink]="['/login']"><span class="h5"><b><i>Login</i></b></span></a>
+                  </li>
+                  <li class="nav-item mx-5" *ngIf="loggedUser" >
+                    <button class="btn btn-warning nav-link" (click)="logout()"><b>Logout</b></button>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </div>
+  </nav>

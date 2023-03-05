@@ -1,0 +1,92 @@
+<app-header></app-header>
+<div class="fluid-container mt-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"> 
+            <table  class="table bg-light table-striped table-bordered center mt-5">
+                <tr style="text-align:center" class="thead-light">
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Quantity</th>
+                    <th>Total Cost</th>
+                </tr>
+                <tr style="text-align:center"  *ngFor="let product of cart, let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.cost | currency:'INR'}}</td>
+                    <td>
+                        <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="input-group col-md-6">
+                            <input type="number" style="width: 2em" (keypress)="numberOnly($event)" class="form-control" value="quantity" ([ngModel])="product.quantity" [value]="product.quantity">
+                            <div class="input-group-append" id="button-addon4" >
+                                <button class="btn" type="button"  (click)="increment(product, product.quantity)">+</button>
+                                <button class="btn" type="button" [disabled]="product.quantity<=0" (click)="decrement(product,product.quantity)">-</button>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                    <td>
+                       <h6>{{product.totalCost | currency:'INR'}}</h6> 
+                    </td>
+                </tr>
+                <tr style="text-align:center">
+                    
+                    <td colspan="3"></td>
+                    <td class="h5">Total</td>
+                    <td>
+                        <h5>
+                            {{amount | currency:'INR'}}
+                        </h5>
+                       
+                    </td>
+                </tr>
+            </table>  
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-primary" (click)="gotoProducts()">Go To Products</button>
+                </div> 
+                <div class="col-md-6 ">
+                    <button class="btn btn-primary float-right" (click)="popup = true">Buy Now</button>
+                </div> 
+            </div>                 
+        </div>
+    </div>
+</div>
+<div class="overlay" *ngIf="popup">
+	<div class="popup">
+		<h2 class="mx-5">Payment GateWay</h2>
+		<a class="close" (click)="popup = false">&times;</a>
+		<div class="content">
+            <form [formGroup]="paymentForm" class="form-group" (ngSubmit)="payNow()">
+                    <div class="col-md-9 mx-5">
+                        <input type="email" class="form-control mt-5"  id="emailId" placeholder="Enter your Email" name="emailId" formControlName="emailId">
+                        <div class="mt-2" *ngIf="paymentForm.controls.emailId.errors && (paymentForm.controls.emailId.touched || paymentForm.controls.emailId.dirty)">
+                            <span class="error" *ngIf="paymentForm.controls.emailId.errors?.required"> *Enter Your Email Id</span>
+                            <span class="error" *ngIf="paymentForm.controls.emailId.errors?.pattern"> *Enter a valid Email</span>
+                        </div>
+                         
+                        <input type="tel" class="form-control mt-2" (keypress)="numberOnly($event)" maxlength="12" placeholder="Enter your Card Number" fromControlName="cardNumber">
+                        <div class="mt-2" *ngIf="paymentForm.controls.cardNumber.errors && (paymentForm.controls.cardNumber.touched || paymentForm.controls.cardNumber.dirty) ">
+                            <span class="text-danger" *ngIf="paymentForm.controls.cardNumber.errors?.required">*Card Number is Required!</span> 
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <input type="month" class="form-control" placeholder="Exp Date"/>
+                                    <input type="tel" (keypress)="numberOnly($event)" maxlength="3" class="form-control" placeholder="CVV"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 me-4">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-6 me-3">
+                                <button class="btn btn-success" type="submit" [disabled]="paymentForm.invalid" >{{amount | currency:'INR'}} Pay Now</button>
+                            </div>
+                        </div> 
+                    </div>
+            </form>
+		</div>
+	</div>
+</div>

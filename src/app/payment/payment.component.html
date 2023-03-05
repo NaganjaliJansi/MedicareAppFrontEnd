@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="fluid-container mt-5">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 card p-5 bg-light">
+            <h2 style="color:indigo" class="text-center">Hi {{username}},</h2>
+            <h2 style="color:green" class="text-center">Your Order has been Succesfully placed!!</h2>
+            <h3 style="color:blue" class="text-center"> Your order id is : {{id}}</h3>
+            <h3>Items are : </h3>
+            <table class="table bg-light table-striped center mt-3">
+                <tr style="text-align:center">
+                    <td>S.No</td>
+                    <td>Name</td>
+                    <td>Quantity</td>
+                    <td>Cost</td>
+                </tr>
+                <tr style="text-align:center" *ngFor="let p of cartProducts,let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.quantity}}</td>
+                    <td>{{p.totalCost | currency:'INR'}}</td>
+                </tr>
+                <tr style="text-align:center">
+                    <td colspan="3" class="h5">Amount Paid : </td>
+                    <td class="h5">{{amount | currency:'INR'}}</td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+</div>
+

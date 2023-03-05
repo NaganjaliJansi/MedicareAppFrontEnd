@@ -1,0 +1,18 @@
+.error{
+    
+    color:red;
+
+}
+
+/* input.ng-invalid.ng-touched.ng-dirty.required{
+    border:3px solid red;
+}
+input.ng-touched{
+    border:3px solid red;
+}
+input.ng-valid.ng-touched{
+    border:3px solid green;
+}
+.ng-invalid:not(form)  {
+    border-left: 5px solid red /* red 
+  } */

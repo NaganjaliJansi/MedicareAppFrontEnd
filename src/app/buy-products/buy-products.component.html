@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div >
+    <div *ngIf="!errorMessage" class="fluid-container ">
+        <div class="row mt-5">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="h5"><b><i>Hi {{username}},</i></b></div>
+                <table class="table mt-4 bg-light table-striped table-bordered center">
+                    <tr style="text-align:center" class="thead-light">
+                        <th>S.No</th>
+                        <th>Medicine Name</th>
+                        <th>Brand</th>
+                        <th>Description</th>
+                        <th>Cost</th>
+                        <th>status</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr style="text-align:center" *ngFor="let p of products,let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{p.name}}</td>
+                        <td>{{p.brand}}</td>
+                        <td>{{p.description}}</td>
+                        <td>{{p.cost}}</td>
+                        <td *ngIf="p.status==true" class="text-success">Available</td>
+                        <td *ngIf="p.status==false" class="text-danger">Not Available</td>
+                        <td>
+                            <div class="form-check"> 
+                                <input type="checkBox" [disabled]="p.status===false"  class="form-check-inline" id="selected" [value]="p.id" name="selected" (change)="saveSelected($event,i+1)">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <button class="btn btn-primary float-right px-3 pe-3 pt-2 pb-2" (click)="gotoCart()">Go To Cart</button>
+                </div>
+                <div *ngIf="productError" class=" justify-content-center" >
+                    <h5 class=" justify-content-center error mt-3">*{{productError}}</h5>
+                </div>
+            </div>
+        
+        </div>
+        
+    </div>
+    <div *ngIf="errorMessage" class=" justify-content-center m-5" >
+        <h3 class=" card justify-content-center m-5 p-5">{{errorMessage}}</h3>
+    </div>
+</div>

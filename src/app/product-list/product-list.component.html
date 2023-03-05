@@ -1,0 +1,36 @@
+<app-admin-header></app-admin-header>
+<div *ngIf="!errorMessage" class="fluid-container ">
+    <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table bg-light table-bordered table-stripped center mt-5">
+                <tr style="text-align:center">
+                    <th>S.No</th>
+                    <th>Medicine Name</th>
+                    <th>Brand</th>
+                    <th>Description</th>
+                    <th>Cost</th>
+                    <th>status</th>
+                    <th>Action</th>
+                </tr>
+                <tr style="text-align:center" *ngFor="let p of products,let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.brand}}</td>
+                    <td>{{p.description}}</td>
+                    <td>{{p.cost}}</td>
+                    <td *ngIf="p.status==true" class="text-success">Available</td>
+                    <td *ngIf="p.status==false" class="text-danger">Not Available</td>
+                    <td>
+                        <button class="btn btn-warning p-2" (click)="edit(p.id)">Edit</button>&nbsp;&nbsp;
+                        <button class="btn btn-danger p-2" (click)="delete(p.id)">Delete</button>&nbsp;&nbsp;
+                        <button class="btn btn-info p-2" (click)="view(p.id)">Info</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div *ngIf="errorMessage" class=" justify-content-center m-5" >
+    <h3 class=" card justify-content-center m-5 p-5">{{errorMessage}}</h3>
+</div>

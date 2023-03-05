@@ -1,0 +1,34 @@
+<app-admin-header></app-admin-header>
+<div *ngIf="!errorMessage" class="fluid-container ">
+    <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table bg-light table-bordered table-striuued center mt-5">
+                <tr style="text-align:center">
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email Id</th>
+                    <th>Mobile No</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+                <tr style="text-align:center" *ngFor="let u of users,let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{u.lastName +" "+ u.firstName}}</td>
+                    <td>{{u.emailId}}</td>
+                    <td>{{u.mobileNo}}</td>
+                    <td>{{u.password}}</td>
+                    <td>
+                        <button class="btn btn-warning p-2" (click)="edit(u.id)">Edit</button>&nbsp;&nbsp;
+                        <button class="btn btn-danger p-2" (click)="delete(u.id)">Delete</button>&nbsp;&nbsp;
+                        <button class="btn btn-info p-2" (click)="view(u.id)">Info</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div *ngIf="errorMessage" class=" justify-content-center m-5" >
+    <h3 class=" card justify-content-center m-5 u-5">{{errorMessage}}</h3>
+</div>
+

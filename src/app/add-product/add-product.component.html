@@ -1,0 +1,80 @@
+<app-admin-header></app-admin-header>
+<div class="fluid-container bg-light">
+    <div class="row mt-5">
+        <div class="col-md-3 "></div>
+        <div class="col-md-5 mx-5">
+            <form [formGroup]="AddProductForm" class="card m-5 p-5">
+                <div class="text-center mb-3"><h2><b>{{Title}}</b></h2></div>
+                <div class="row " *ngIf="productId">
+                    <div class="col-md-3 form-group">
+                        <label for="id"  class="form-label"> Id :</label>
+                        <input type="text" [(ngModel)]="product.id" class="form-control form-control-lg" formControlName="id" id="id" >
+                        
+                    </div> 
+                    <div class="col-md-9 form-group">
+                         <label for="name"  class="form-label">Product Name :</label>
+                         <input type="text" [(ngModel)]="product.name" class="form-control form-control-lg" formControlName="name" id="name" required minlength="4">
+                         <div class="mt-2" *ngIf="AddProductForm.controls.name.errors && (AddProductForm.controls.name.touched || AddProductForm.controls.name.dirty)">
+                             <span class="error" *ngIf="AddProductForm.controls.name.errors?.required"> *Enter the Product Name</span>
+                             <span class="error" *ngIf="AddProductForm.controls.name.errors?.minlength"> *Product Name must be minimum 4 characters</span>
+                         </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="!productId">
+                    <label for="name"  class="form-label">Product Name :</label>
+                    <input type="text" [(ngModel)]="product.name" class="form-control form-control-lg" formControlName="name"  id="name" required  minlength="4">
+                    <div class="mt-2" *ngIf="AddProductForm.controls.name.errors && (AddProductForm.controls.name.touched || AddProductForm.controls.name.dirty)">
+                        <span class="error" *ngIf="AddProductForm.controls.name.errors?.required"> *Enter the Product Name</span>
+                        <span class="error" *ngIf="AddProductForm.controls.name.errors?.minlength"> *Product Name must be minimum 4 characters</span>
+                    </div>
+                </div>
+                
+                <div class="form-group ">
+                    <label for="brand" class="form-label">Brand :</label>
+                    <input type="text" [(ngModel)]="product.brand" class="form-control form-control-lg" formControlName="brand" id="brand" required minlength="4">
+                    <div class="mt-2" *ngIf="AddProductForm.controls.brand.errors && (AddProductForm.controls.brand.touched || AddProductForm.controls.brand.dirty)">
+                        <span class="error" *ngIf="AddProductForm.controls.brand.errors?.required"> *Enter the Brand</span>
+                        <span class="error" *ngIf="AddProductForm.controls.brand.errors?.minlength"> *Brand must be minimum 4 characters</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="form-label">Description :</label>
+                    <input type="text" [(ngModel)]="product.description" class="form-control form-control-lg" formControlName="description" id="description" required minlength="10">
+                    <div class="mt-2" *ngIf="AddProductForm.controls.description.errors && (AddProductForm.controls.description.touched || AddProductForm.controls.description.dirty)">
+                        <span class="error" *ngIf="AddProductForm.controls.description.errors?.required"> *Enter the Description</span>
+                        <span class="error" *ngIf="AddProductForm.controls.description.errors?.minlength"> *Description must be minimum 10 characters</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                         <label for="cost" class="form-label">Cost :</label>
+                         <input type="text" class="form-control" [(ngModel)]="product.cost" class="form-control form-control-lg" (keypress)="numberOnly($event)" formControlName="cost" id="cost" required max="500">
+                         <div class="mt-2" *ngIf="AddProductForm.controls.cost.errors &&  (AddProductForm.controls.cost.touched || AddProductForm.controls.cost.dirty )">
+                            <span class="error" *ngIf="AddProductForm.controls.cost.errors?.required"> *Enter the Cost</span>
+                            <span class="error" *ngIf="AddProductForm.controls.cost.errors?.max"> *Cost must not exceed 500</span>
+                        </div>
+                    </div>
+                    <div class="col form-group">
+                            <label for="status" class="form-label">Status:</label>
+                            <select class="form-control form-control-lg" formControlName="status" [(ngModel)]="product.status" id="status">
+                                <option value="true" >Available</option>
+                                <option value="false">Not Available</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mt-3 ">
+                    <div class="col-md-3">
+                        <button type="reset" class="btn btn-danger p-3"> Reset </button>
+                    </div>
+                    <div class="col-md-3 "></div>
+                    <div class="col-md-6">
+                        <button type="submit" [disabled]="AddProductForm.invalid" class="btn btn-primary mx-5 p-3" (click)="onSubmit()"> {{Button}}</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
